@@ -23,7 +23,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                default_target_path: /admin
+                default_target_path: /home
                 
                 
     encoders:
@@ -33,5 +33,5 @@ security:
             
             
     access_control:
-        # require ROLE_ADMIN for /admin*
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        # require ROLE_USER for /home*
+        - { path: ^/home, roles: ROLE_USER }

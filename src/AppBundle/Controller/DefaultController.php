@@ -19,13 +19,11 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/admin", name="admin_index")
+     * @Route("/home", name="home_index")
      */
-    public function adminAction(Request $request)
+    public function homeAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+        return $this->render('default/home.html.twig');
     }
 }
