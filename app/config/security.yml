@@ -12,6 +12,7 @@ security:
                 # manager_name: customer
 
     firewalls:
+    
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -24,6 +25,10 @@ security:
                 login_path: login
                 check_path: login
                 default_target_path: /home
+        
+            logout:
+                path:   /logout
+                target: /
                 
                 
     encoders:

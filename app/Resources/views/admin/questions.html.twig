@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+    {#<form action="?act=do-new-room" method="post" class="well">
+        
+        <h2>Create a new Question</h2>
+        <div class="form-row">
+            <div class="col">
+                <label for="questionText"><strong>Question Text: </strong></label>
+                <textarea class="form-control" id="text" rows="8" required></textarea>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="var1"><strong>1st variant:</strong> </label>
+                <input type="text" class="form-control col-sm-7" id="var1" placeholder="bla" required>
+                <label for="var2"><strong>2nd variant:</strong> </label>
+                <input type="text" class="form-control col-sm-7" id="var2" placeholder="bla" required>
+                <label for="var3"><strong>3rd variant:</strong> </label>
+                <input type="text" class="form-control col-sm-7" id="var3" placeholder="bla" required>
+                <div class="form-row">
+                   
+                    <label for="exampleFormControlSelect1"><strong>Right variant is </strong></label>
+                    <select class="form-control col-sm-1" id="exampleFormControlSelect1">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                    </select>
+            
+                </div>
+                
+                <div class="buttons">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+                     
+            </div>
+        </div>
+        
+     
+              
+    </form>#}
+    
+    {{ form_start(form) }}
+    {{ form_row(form.text) }}
+    {{ form_row(form.variant1) }}
+    {{ form_row(form.variant2) }}
+    {{ form_row(form.variant3) }}
+    {{ form_row(form.answer) }}
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+{{ form_end(form) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {#<style type="text/css">
+    
+    .buttons, label{
+        margin-top: 20px;
+    }
+    select {
+        margin-top: 12px;
+        margin-left: 20px;
+    }
+    
+</style>#}
+{% endblock %}
