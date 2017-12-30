@@ -8,16 +8,40 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Form\QuestionForm;
 use AppBundle\Entity\Question;
+use AppBundle\Form\QuizForm;
+use AppBundle\Entity\Quiz;
 
 class AdminController extends Controller
 {
     /**
      * @Route("/home/quizes", name="quizes")
      */
-    public function quizesAction(Request $request)
+    public function homeAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('admin/quizes.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $quiz = new Quiz();
+        $questions = $this->getDoctrine()
+            ->getRepository(Question::class)
+            ->findAll();
+      
+        $form = $this->createForm(QuizForm::class, $quiz, array(
+            'questions' => $questions,
+   
+        ));
+        
+        
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($quiz->getQuestions() as $question) {
+                $em->persist($question);
+            }
+            $em->persist($quiz);
+            $em->flush();
+        }
+        return $this->render('admin/quizes.html.twig', array(
+            'form' => $form->createView(),
+            'questions' => $questions,
+        ));
     }
     
     /**
@@ -27,19 +51,12 @@ class AdminController extends Controller
     {
         $question = new Question();
         $form = $this->createForm(QuestionForm::class, $question);
-                
-        //var_dump($form);
-        // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-            
+  
             $em = $this->getDoctrine()->getManager();
             $em->persist($question);
             $em->flush();
-
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
 
             return $this->redirectToRoute('questions');
         }
@@ -59,4 +76,5 @@ class AdminController extends Controller
         // replace this example code with whatever you need
         return $this->render('admin/users.html.twig');
     }
+    
 }

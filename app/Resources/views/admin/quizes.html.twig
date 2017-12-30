@@ -1,6 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.name) }}
     
-    <h1>Welcome to the <strong>Home page! Soon here will be a list of quizes</strong></h1>
-{% endblock %}
+    {{ form_row(form.questions) }}
+
+    {{ form_end(form) }}
+    
+    <a class="btn btn-primary btn-lg" href="/home/questions" role="button">Create a new question</a>
+
+{% endblock body %}
+
+{% block javascripts %}
+    
+{%endblock javascripts %}

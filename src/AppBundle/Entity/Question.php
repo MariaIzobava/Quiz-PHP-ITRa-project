@@ -16,11 +16,11 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 class Question
 {
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="id_question")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $id_question;
 
     /**
      * @ORM\Column(type="string", length=225, unique=true)
@@ -98,6 +98,11 @@ class Question
     public function getAnswer()
     {
         return $this->answer;
+    }
+    
+    public function __toString()
+    {
+        return $this->text;
     }
     
     public function setAnswer($answer)

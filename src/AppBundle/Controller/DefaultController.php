@@ -19,7 +19,7 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/home", name="home_index")
+     * @Route("/home", name="home")
      */
     public function homeAction(Request $request)
     {
