@@ -64,6 +64,10 @@ class Quiz
     {
         return $this->name;
     }
+    public function getId()
+    {
+        return $this->id_quiz;
+    }
     public function getDescription()
     {
         return $this->description;

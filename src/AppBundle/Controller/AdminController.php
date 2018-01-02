@@ -26,7 +26,6 @@ class AdminController extends Controller
       
         $form = $this->createForm(QuizForm::class, $quiz, array(
             'questions' => $questions,
-   
         ));
         
         

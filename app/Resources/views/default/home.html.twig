@@ -1,6 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="row">
+         
     
-    <h1>Welcome to the <strong>Home page! Soon here will be a list of quizes</strong></h1>
+    {% for quiz in quizes %}
+        
+        {#<div class="card" style="width: 18rem; height: 10rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ quiz.getName() }}</h5>
+              
+            </div>
+          </div>#}
+        
+        <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h4 class="card-title">{{ quiz.getName() }}</h4>
+              <h6 class="card-subtitle mb-2 text-muted">{{ quiz.getDateOfCreate().format('Y-m-d') }}</h6>
+              <p class="card-text">Number of players: {{ quiz.getDescription() }}</p>
+              <p class="card-text">Leader: {{ quiz.getDescription() }}</p>
+              <label for="var3"><strong>active</strong> </label>
+              <input type="checkbox" {%if quiz.getFlagActive()%} checked="true" {%endif%} disabled="true">
+              
+              <a class="btn btn-primary btn-lg float-right" href="/quiz/{{quiz.getId()}}" role="button">Start</a>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+    
+          </div>
 {% endblock %}

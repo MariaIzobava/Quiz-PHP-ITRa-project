@@ -64,6 +64,11 @@ class User implements UserInterface, \Serializable
     {
         return $this->email;
     }
+    
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function setEmail($email)
     {
