@@ -57,19 +57,47 @@ class QuizController extends Controller
         
         $num = $results['question'];
         
-        if ($num >= sizeof($questions)) {
+        if ($num >= sizeof($questions)) 
+        {
+            
+            $sql_query = "SELECT * FROM `quiz_user` WHERE `id_quiz`=$id ORDER BY result DESC";
+            $statement = $connection->prepare($sql_query);
+            $statement->execute();
+            $rating = $statement->fetchAll();
+            $users_list = array();
+            $k = 0;
+            $position = 0;
+            foreach ($rating as $entity) 
+            {
+                $entity_id_user = $entity['id_user'];
+                $sql_query = "SELECT username FROM `app_users` WHERE `id`=$entity_id_user ";
+                $statement = $connection->prepare($sql_query);
+                $statement->execute();
+                $w = $statement->fetch();
+                $users_list[] = $w['username'];
+                
+                if ($this->get('security.token_storage')->getToken()->getUser()->getUsername() == $users_list[$k]) {
+                            $position = $k + 1;
+                        }
+                $k++;
+            }
+            while ($k < 3) {
+                $users_list[] = 'none';
+                $k++;
+            }
+            
             return $this->render('quiz/result.html.twig', array (
-                'results' => $results,
-        ));
+                'users_list' => $users_list,
+                'position' => $position,
+                'name' => $this->get('security.token_storage')->getToken()->getUser()->getUsername(), 
+            ));
         }
         
         $form = $this->createForm(AnswerSubmitForm::class, null, array(
             'user_question_data' => $results, 
             'questions' => $questions,
         ));
-        
-        
-        
+         
         
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,7 +107,7 @@ class QuizController extends Controller
             if ($data['answers'] == $questions[$num]['variant3']) $ans_value = 3;
             $new_result = $results['result'] + ($ans_value == $questions[$num]['answer'] ? 1 : 0);
             $new_question = $results['question'] + 1;
-            var_dump($new_question);
+           
             $sql_query = "UPDATE `quiz_user` SET `question`=$new_question, `result`=$new_result WHERE `id_quiz`=$id AND `id_user`=$user_id";
             $statement = $connection->prepare($sql_query);
             $statement->execute();

@@ -2,6 +2,15 @@
 
 {% block body %}
     
-    <h1> You've succesfully completed this Quiz! Congratulations!</h1>
+    <h1> {{name}}, you've succesfully completed this Quiz! Congratulations!</h1>
+    <h2> TOP 3: </h2>
+   
+        <p> 1: {{users_list[0]}}</p>
+    
+        <p> 2: {{users_list[1] }}</p>
+    
+        <p> 3: {{users_list[2]}}</p>
+    
+    <p>Your position is {{position}} </p>
     
 {% endblock body %}
