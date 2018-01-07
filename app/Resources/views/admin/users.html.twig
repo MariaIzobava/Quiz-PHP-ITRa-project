@@ -2,7 +2,73 @@
 
 {% block body %}
     
-    <div id=”entities-grid”>
-    <!-- здесь пусто, сюда плагин должен будет вставить таблицу -->
+    <div class="entity-components">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col" class="col2" direct="ASC" name="Id">
+                      <div class="ch">Id ↓</div>
+                      <br>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button">Go!</button>
+                        </span>
+                      </div>
+                  </th>
+                  <th scope="col" class="col3" direct="ASC" name="Username">
+                      <div class="ch">Username ↓ </div>
+                      <br>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button">Go!</button>
+                        </span>
+                      </div>
+                  </th>
+                  <th scope="col" class="col4" direct="ASC" name="Email">
+                      <div class="ch">Email ↓ </div>
+                      <br>
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                          <button class="btn btn-default" type="button">Go!</button>
+                        </span>
+                      </div>
+                  </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr> 
+                    <td colspan="4" style="text-align: center">
+                        <button class="btn btn-default left" type="button"><</button>
+                        <span>&#160;1&#160;</span>
+                        <button class="btn btn-default right" type="button">></button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
     </div>
-{% endblock %}
+{% endblock body%}
+
+{% block javascripts %}
+    <script src= "{{ asset('js/ajaxGrid.js') }} "> </script>
+    <script> 
+        jQuery(document).ready(function()
+        {
+            $(".entity-components").ajaxGrid( {
+                    dataUrl: "/ajax", 
+                    sortableColumns: ["id", "username", "email"], 
+                    filterableColumns: ["id", "username", "email"], 
+                    rowsPerPage: 5 
+            });
+
+        });
+         
+    </script>
+{%endblock javascripts %}

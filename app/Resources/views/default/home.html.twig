@@ -2,32 +2,36 @@
 
 {% block body %}
     <div class="row">
-         
-    
-    {% for quiz in quizes %}
-        
-        {#<div class="card" style="width: 18rem; height: 10rem;">
-            <div class="card-body">
-              <h5 class="card-title">{{ quiz.getName() }}</h5>
-              
-            </div>
-          </div>#}
+
+    {% for result in results %}
         
         <div class="col-sm-4">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h4 class="card-title">{{ quiz.getName() }}</h4>
-              <h6 class="card-subtitle mb-2 text-muted">{{ quiz.getDateOfCreate().format('Y-m-d') }}</h6>
-              <p class="card-text">Number of players: {{ quiz.getDescription() }}</p>
-              <p class="card-text">Leader: {{ quiz.getDescription() }}</p>
+              <h4 class="card-title">{{ result['quiz'].getName() }}</h4>
+              <h6 class="card-subtitle mb-2 text-muted">{{ result['quiz'].getDateOfCreate().format('Y-m-d') }}</h6>
+              <p class="card-text">Number of players: {{ result['users'] }}</p>
+              <p class="card-text">Leader: {{ result['leader'] }}</p>
               <label for="var3"><strong>active</strong> </label>
-              <input type="checkbox" {%if quiz.getFlagActive()%} checked="true" {%endif%} disabled="true">
+              <input type="checkbox" {%if result['quiz'].getFlagActive()%} checked="true" {%endif%} disabled="true">
               
-              <a class="btn btn-primary btn-lg float-right" href="/quiz/{{quiz.getId()}}" role="button">Start</a>
+              <a class="btn btn-primary btn-lg float-right" href="/quiz/{{result['quiz'].getId()}}" role="button">Start</a>
             </div>
           </div>
         </div>
     {% endfor %}
     
-          </div>
+    </div>
+ 
+{% endblock body%}
+
+{% block stylesheets %}
+    <style type="text/css">
+    
+    .card{
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+    
+</style>
 {% endblock %}

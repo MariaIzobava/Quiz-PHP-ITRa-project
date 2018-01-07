@@ -7,16 +7,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Form\QuestionForm;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Entity\Question;
 use AppBundle\Form\QuizForm;
 use AppBundle\Entity\Quiz;
+use AppBundle\Entity\User;
+
 
 class AdminController extends Controller
 {
     /**
      * @Route("/home/quizes", name="quizes")
      */
-    public function homeAction(Request $request)
+    public function quizesAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $quiz = new Quiz();
@@ -72,7 +75,6 @@ class AdminController extends Controller
      */
     public function usersAction(Request $request)
     {
-        // replace this example code with whatever you need
         return $this->render('admin/users.html.twig');
     }
     

@@ -2,15 +2,33 @@
 
 {% block body %}
     
-    <h1> {{name}}, you've succesfully completed this Quiz! Congratulations!</h1>
+    <h1> <strong>{{name}}</strong>, you've succesfully completed this Quiz! Congratulations!</h1>
     <h2> TOP 3: </h2>
    
-        <p> 1: {{users_list[0]}}</p>
+        <h3> 1: {{users_list[0]}}</h3>
     
-        <p> 2: {{users_list[1] }}</p>
+        <h3> 2: {{users_list[1]}}</h3>
     
-        <p> 3: {{users_list[2]}}</p>
+        <h3> 3: {{users_list[2]}}</h3>
     
-    <p>Your position is {{position}} </p>
+    <h4>Your position is №{{position}}. </h4>
     
 {% endblock body %}
+
+{% block stylesheets %}
+    <style type="text/css">
+    
+    h3{
+        margin-left: 50px;
+    }
+    h2, h1, h4 {  
+        margin-left: 20px;
+    }
+    
+    h2, h4 {
+        margin-top: 30px;
+    }
+    
+    
+</style>
+{% endblock %}
